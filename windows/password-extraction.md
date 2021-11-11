@@ -15,7 +15,7 @@ $ samdump2 System SAM
 
 ### mimikatz.exe
 
-Need to match architectures and high privileges.
+Need to match architectures.
 
 ```
 privilege::debug

