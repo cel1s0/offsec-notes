@@ -4,15 +4,15 @@ description: Root access with writable services.
 
 # Writable services
 
-(root) NOPASSWD: /sbin/halt, /sbin/reboot, /sbin/poweroff&#x20;
+(root) NOPASSWD: /sbin/halt, /sbin/reboot, /sbin/poweroff
 
-OR&#x20;
+OR
 
 have enough privilege to restart the service or host
 
-The most important parameters here are :&#x20;
+The most important parameters here are :
 
-* User : The user that the service will run as.&#x20;
+* User : The user that the service will run as.
 * Execstart : It specifies the command that will run when the service starts.
 
 Now we want to get shell as root. There are many ways to do so with systemd services.

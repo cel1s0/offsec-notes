@@ -41,4 +41,3 @@ Exploit target:
    --  ----
    1   Linux x86_64
 ```
-

@@ -11,14 +11,3 @@ This is Furkan Kılıçarslan. Here is the summary of me,
 * I am doing stuffs in 3D Desinging and 3D Printing.
 
 You can find more information about me via [LinkedIn](https://www.linkedin.com/in/furkankilicarslan).
-
-
-
-
-
-
-
-
-
-
-

