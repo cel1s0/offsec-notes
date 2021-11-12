@@ -33,7 +33,7 @@ NameVirtualHost *:80
 
 
 htdigest /var/www/test/passwd.dav webdav test
-password:test
+password:pass
 
 locate depmod
 /sbin/depmod
@@ -55,5 +55,5 @@ echo 'kernel_fs       coda' >> .davfs2/davfs2.conf
 
 mount /home/user/dav/
 test
-test
+pass
 ```
