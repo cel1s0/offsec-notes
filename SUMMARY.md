@@ -77,6 +77,7 @@
     * [Dynamic Forwarding](readme/port-forwarding/dynamic-forwarding.md)
   * [Useful links](readme/useful-links.md)
 * [PortSwigger Academy](portswigger-academy/README.md)
+  * [Business logic vulnerabilities](portswigger-academy/business-logic-vulnerabilities.md)
   * [OS Command Injection](portswigger-academy/os-command-injection.md)
   * [File Path Traversal](portswigger-academy/file-path-traversal.md)
 * [Walkthroughs](walkthroughs/README.md)
