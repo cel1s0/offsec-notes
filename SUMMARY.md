@@ -82,6 +82,7 @@
   * [File Path Traversal](portswigger-academy/file-path-traversal.md)
   * [Business logic vulnerabilities](portswigger-academy/business-logic-vulnerabilities.md)
   * [Information disclosure vulnerabilities](portswigger-academy/information-disclosure-vulnerabilities.md)
+  * [Access control vulnerabilities and privilege escalation](portswigger-academy/access-control-vulnerabilities-and-privilege-escalation.md)
 * [Walkthroughs](walkthroughs/README.md)
   * [PG Practice](walkthroughs/pg-practice/README.md)
     * [WARM UP](walkthroughs/pg-practice/warm-up/README.md)
