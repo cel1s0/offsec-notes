@@ -85,6 +85,7 @@
   * [Access control vulnerabilities and privilege escalation](portswigger-academy/access-control-vulnerabilities-and-privilege-escalation.md)
   * [Server-side request forgery (SSRF)](portswigger-academy/server-side-request-forgery-ssrf.md)
   * [XML external entity (XXE) injection](portswigger-academy/xml-external-entity-xxe-injection.md)
+  * [Cross-site scripting](portswigger-academy/cross-site-scripting.md)
 * [Walkthroughs](walkthroughs/README.md)
   * [PG Practice](walkthroughs/pg-practice/README.md)
     * [WARM UP](walkthroughs/pg-practice/warm-up/README.md)
