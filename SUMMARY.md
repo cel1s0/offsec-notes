@@ -129,6 +129,7 @@
       * [Snookums](walkthroughs/pg-practice/get-to-work/snookums.md)
       * [Nibbels](walkthroughs/pg-practice/get-to-work/nibbels.md)
       * [Banzai](walkthroughs/pg-practice/get-to-work/banzai.md)
+      * [Sybaris](walkthroughs/pg-practice/get-to-work/sybaris.md)
     * [TRY HARDER](walkthroughs/pg-practice/try-harder/README.md)
       * [Peppo](walkthroughs/pg-practice/try-harder/peppo.md)
       * [Sirol](walkthroughs/pg-practice/try-harder/sirol.md)
