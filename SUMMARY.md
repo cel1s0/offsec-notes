@@ -88,6 +88,7 @@
     * [XML external entity (XXE) injection](portswigger-academy/server-side-topics/xml-external-entity-xxe-injection.md)
   * [Client-side topics](portswigger-academy/client-side-topics/README.md)
     * [Cross-site scripting](portswigger-academy/client-side-topics/cross-site-scripting.md)
+    * [Cross-site request forgery (CSRF)](portswigger-academy/client-side-topics/cross-site-request-forgery-csrf.md)
 * [Walkthroughs](walkthroughs/README.md)
   * [PG Practice](walkthroughs/pg-practice/README.md)
     * [WARM UP](walkthroughs/pg-practice/warm-up/README.md)
