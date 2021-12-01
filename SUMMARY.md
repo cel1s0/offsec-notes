@@ -89,6 +89,7 @@
   * [Client-side topics](portswigger-academy/client-side-topics/README.md)
     * [Cross-site scripting](portswigger-academy/client-side-topics/cross-site-scripting.md)
     * [Cross-site request forgery (CSRF)](portswigger-academy/client-side-topics/cross-site-request-forgery-csrf.md)
+    * [Cross-origin resource sharing (CORS)](portswigger-academy/client-side-topics/cross-origin-resource-sharing-cors.md)
 * [Walkthroughs](walkthroughs/README.md)
   * [PG Practice](walkthroughs/pg-practice/README.md)
     * [WARM UP](walkthroughs/pg-practice/warm-up/README.md)
