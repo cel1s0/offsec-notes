@@ -91,6 +91,7 @@
     * [Cross-origin resource sharing (CORS)](portswigger-academy/client-side-topics/cross-origin-resource-sharing-cors.md)
     * [Cross-site request forgery (CSRF)](portswigger-academy/client-side-topics/cross-site-request-forgery-csrf.md)
     * [Clickjacking (UI redressing)](portswigger-academy/client-side-topics/clickjacking-ui-redressing.md)
+    * [DOM-based vulnerabilities](portswigger-academy/client-side-topics/dom-based-vulnerabilities.md)
 * [Walkthroughs](walkthroughs/README.md)
   * [PG Practice](walkthroughs/pg-practice/README.md)
     * [WARM UP](walkthroughs/pg-practice/warm-up/README.md)
