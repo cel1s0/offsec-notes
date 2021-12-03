@@ -115,6 +115,7 @@
       * [QuackerJack](walkthroughs/pg-practice/get-to-work/quackerjack.md)
       * [Shenzi](walkthroughs/pg-practice/get-to-work/shenzi.md)
       * [Sybaris](walkthroughs/pg-practice/get-to-work/sybaris.md)
+      * [XposedAPI](walkthroughs/pg-practice/get-to-work/xposedapi.md)
       * [Zino](walkthroughs/pg-practice/get-to-work/zino.md)
       * [Nickel](walkthroughs/pg-practice/get-to-work/nickel.md)
       * [Sorcerer](walkthroughs/pg-practice/get-to-work/sorcerer.md)
