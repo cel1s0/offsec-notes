@@ -92,6 +92,7 @@
     * [Cross-site request forgery (CSRF)](portswigger-academy/client-side-topics/cross-site-request-forgery-csrf.md)
     * [Clickjacking (UI redressing)](portswigger-academy/client-side-topics/clickjacking-ui-redressing.md)
     * [DOM-based vulnerabilities](portswigger-academy/client-side-topics/dom-based-vulnerabilities.md)
+    * [Testing for WebSockets security vulnerabilities](portswigger-academy/client-side-topics/testing-for-websockets-security-vulnerabilities.md)
 * [Walkthroughs](walkthroughs/README.md)
   * [PG Practice](walkthroughs/pg-practice/README.md)
     * [WARM UP](walkthroughs/pg-practice/warm-up/README.md)
