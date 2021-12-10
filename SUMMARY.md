@@ -78,6 +78,7 @@
   * [Useful links](readme/useful-links.md)
 * [PortSwigger Academy](portswigger-academy/README.md)
   * [Server-side topics](portswigger-academy/server-side-topics/README.md)
+    * [File upload vulnerabilities](portswigger-academy/server-side-topics/file-upload-vulnerabilities.md)
     * [Authentication vulnerabilities](portswigger-academy/server-side-topics/authentication-vulnerabilities.md)
     * [OS Command Injection](portswigger-academy/server-side-topics/os-command-injection.md)
     * [File Path Traversal](portswigger-academy/server-side-topics/file-path-traversal.md)
