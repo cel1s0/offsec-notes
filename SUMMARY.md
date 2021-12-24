@@ -99,6 +99,7 @@
     * [Server-side template injection](portswigger-academy/advanced-topics/server-side-template-injection.md)
     * [Web cache poisoning](portswigger-academy/advanced-topics/web-cache-poisoning.md)
     * [HTTP Host header attacks](portswigger-academy/advanced-topics/http-host-header-attacks.md)
+    * [HTTP request smuggling](portswigger-academy/advanced-topics/http-request-smuggling.md)
     * [OAuth 2.0 authentication vulnerabilities](portswigger-academy/advanced-topics/oauth-2.0-authentication-vulnerabilities.md)
 * [Walkthroughs](walkthroughs/README.md)
   * [PG Practice](walkthroughs/pg-practice/README.md)
