@@ -14,7 +14,7 @@
 
 **Path Traversal Cheat Sheet: Windows -** https://gracefulsecurity.com/path-traversal-cheat-sheet-windows/
 
-**Command Inj List - **https://github.com/payloadbox/command-injection-payload-list
+**Command Inj List -** https://github.com/payloadbox/command-injection-payload-list
 
 **Shell Escape -** https://www.aldeid.com/wiki/Lshell
 

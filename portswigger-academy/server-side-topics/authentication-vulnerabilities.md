@@ -38,7 +38,7 @@ Filter - Invalid username or password. - Case sensitive, Negative Search anaheim
 
 • Candidate passwords
 
-`username=admin&password=§password§ `
+`username=admin&password=§password§`&#x20;
 
 302 Status - zxcvbnm
 
@@ -64,7 +64,7 @@ We added the line to request.
 
 X-Forwarded-For: 10.10.10.1
 
-**Pitchfork Attack -> **
+**Pitchfork Attack ->**&#x20;
 
 Number 1:1:101 (Max fraction digits:0)
 
@@ -237,7 +237,7 @@ The comment functionality is vulnerable to XSS.
 
 Post a comment with this payload (own exploit server ID).
 
-On the exploit server, open the access log.** You will see target's cookie value.**
+On the exploit server, open the access log. **You will see target's cookie value.**
 
 Decoded -> carlos:26323c16d5f4dabff3bb136f2460a943 - Google it - onceuponatime
 

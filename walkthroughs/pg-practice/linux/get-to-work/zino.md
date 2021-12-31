@@ -29,7 +29,7 @@ Login with that credential. -> [http://192.168.210.64:8003/booked/](http://192.1
 
 admin: \[REDACTED]
 
-**Booked Scheduler 2.7.5 - Remote Command Execution Without Metasploit - **
+**Booked Scheduler 2.7.5 - Remote Command Execution Without Metasploit -**&#x20;
 
 https://github.com/F-Masood/Booked-Scheduler-2.7.5---RCE-Without-MSF
 

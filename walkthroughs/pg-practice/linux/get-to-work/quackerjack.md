@@ -25,7 +25,7 @@
 
 There is a rConfig Version 3.9.4 on 8081.
 
-**rConfig 3.9.4 - 'searchField' Unauthenticated Root Remote Code Execution - **
+**rConfig 3.9.4 - 'searchField' Unauthenticated Root Remote Code Execution -**&#x20;
 
 https://www.exploit-db.com/exploits/48261
 
@@ -40,7 +40,7 @@ Interrupted here. I could not work fully exploit.
 
 admin: ursjanvhgq
 
-**Rconfig File Upload RCE Exploit - **
+**Rconfig File Upload RCE Exploit -**&#x20;
 
 https://gist.github.com/farid007/9f6ad063645d5b1550298c8b9ae953ff
 

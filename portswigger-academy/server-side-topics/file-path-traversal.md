@@ -34,7 +34,7 @@ The sequence ../ is valid within a file path, and means to step up one level in 
 ../../../windows/win.ini
 ```
 
-### **Lab: File path traversal, simple case **
+### **Lab: File path traversal, simple case**&#x20;
 
 view-source:https://aca01f001f9d8480c09625c5001000ea.web-security-academy.net/image?filename=../../../etc/passwd
 
