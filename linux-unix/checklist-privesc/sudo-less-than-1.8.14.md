@@ -38,7 +38,7 @@ Password: e7ccbd117813eee6060129d6f8c76ecb
 
 ### exploit.sh
 
-```
+```bash
 #!/usr/bin/env bash
 # CVE-2015-5602 exploit by t0kx
 # https://github.com/t0kx/privesc-CVE-2015-5602
