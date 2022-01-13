@@ -141,7 +141,6 @@
         * [Sorcerer](walkthroughs/pg-practice/linux/get-to-work/sorcerer.md)
         * [Splodge](walkthroughs/pg-practice/linux/get-to-work/splodge.md)
         * [Sybaris](walkthroughs/pg-practice/linux/get-to-work/sybaris.md)
-        * [UC404](walkthroughs/pg-practice/linux/get-to-work/uc404.md)
         * [Walla](walkthroughs/pg-practice/linux/get-to-work/walla.md)
         * [Webcal](walkthroughs/pg-practice/linux/get-to-work/webcal.md)
         * [XposedAPI](walkthroughs/pg-practice/linux/get-to-work/xposedapi.md)
