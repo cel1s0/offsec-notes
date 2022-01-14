@@ -1,16 +1,12 @@
----
-description: DOC file with using MACRO.
----
+# Microsoft Office
 
-# Office Macro
-
-Microsoft Word macro is one of best-known client-side attack vector.
+Microsoft Office macro is one of best-known client-side attack vector.
 
 Choose VIEW ribbon and selecting Macros option. We type name for the macro and in the MACROS in drop-down menu, select the name of document, then the macro will be add. When we click create, a simple macro framework will be add into our document. We have to save the document as either .docm or the older .doc format. They support embedded macros, .docx format does not.
 
 https://www.revshells.com/ - Reverse - Powershell #4 -Base64 Encoded - 192.168.1.1 - 80
 
-We have to edit the payload for can work. We change related part of payload variable.&#x20;
+We have to edit the payload. We change related part of payload variable.&#x20;
 
 ```
 #!/usr/bin/python

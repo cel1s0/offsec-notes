@@ -1,3 +1,0 @@
-# Medjed
-
-Coming soon.

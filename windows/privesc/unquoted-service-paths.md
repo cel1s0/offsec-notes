@@ -37,3 +37,9 @@ We need to check permissions on the program to can exploit it.
 ```
 icacls "C:\Program Files\Some Folder\Service.exe" 
 ```
+
+We need to check statuses for the program. Is it auto-start service?
+
+```
+sc qc ServiceName
+```

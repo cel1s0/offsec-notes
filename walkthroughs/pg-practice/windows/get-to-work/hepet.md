@@ -1,3 +1,0 @@
-# Hepet
-
-Coming soon.
