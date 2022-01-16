@@ -89,6 +89,8 @@
   * [Port Forwarding](readme/port-forwarding/README.md)
     * [Dynamic Forwarding](readme/port-forwarding/dynamic-forwarding.md)
   * [Useful links](readme/useful-links.md)
+* [Blog](blog/README.md)
+  * [PWK Labs vs PG Practice](blog/pwk-labs-vs-pg-practice.md)
 * [PortSwigger Academy](portswigger-academy/README.md)
   * [Server-side topics](portswigger-academy/server-side-topics/README.md)
     * [Authentication vulnerabilities](portswigger-academy/server-side-topics/authentication-vulnerabilities.md)
