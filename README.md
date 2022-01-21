@@ -2,7 +2,7 @@
 
 ### About
 
-I created this book as a reference guide for Offensive Security. I'll keep adding contents. Currently, I am preparing for OSCP 2nd attempt. I hope it can help you.
+I created this book as a reference guide for Offensive Security. I'll keep adding contents. I hope it can help you.
 
 Before the beginning, I have to say this, most of contents were copy/pasted from other resources. And I add the reference all the time.
 
