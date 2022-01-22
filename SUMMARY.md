@@ -92,6 +92,7 @@
 * [Blog](blog/README.md)
   * [OSCP Preparation](blog/oscp-preparation.md)
   * [New OSCP Exam vs Previous OSCP Exam](blog/new-oscp-exam-vs-previous-oscp-exam.md)
+  * [Movements in AD](blog/movements-in-ad.md)
   * [PWK Lab vs PG Practice](blog/pwk-lab-vs-pg-practice.md)
 * [PortSwigger Academy](portswigger-academy/README.md)
   * [Server-side topics](portswigger-academy/server-side-topics/README.md)
