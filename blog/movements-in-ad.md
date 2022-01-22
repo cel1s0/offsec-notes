@@ -1,7 +1,5 @@
 ---
-description: >-
-  It contains basic methodology for movements in Active Directory. I used these
-  methodology in exam. You can use any tool to identify the way.
+description: It contains basic methodology for movements in Active Directory.
 ---
 
 # Movements in AD
