@@ -50,7 +50,7 @@ If you have cleartext password you can use Spray-Passwords.ps1 to identify the a
 [spray-passwords.ps1.md](../windows/useful-ps-scripts/spray-passwords.ps1.md)
 {% endcontent-ref %}
 
-Check the user has capabilities for explotiable GPO.
+Check the user has capabilities for exploitable GPO.
 
 {% content-ref url="../readme/windows/privesc/abuse-gpo.md" %}
 [abuse-gpo.md](../readme/windows/privesc/abuse-gpo.md)
