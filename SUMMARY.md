@@ -58,6 +58,7 @@
     * [Office Macro](readme/windows/office-macro/README.md)
       * [Microsoft Office](readme/windows/office-macro/microsoft-office.md)
       * [Open Office](readme/windows/office-macro/open-office.md)
+    * [Post Exploitation](readme/windows/post-exploitation.md)
   * [Web](readme/web/README.md)
     * [SQL Injection](readme/web/sql-injection/README.md)
       * [mongodb 2.2.3](readme/web/sql-injection/mongodb-2.2.3.md)
