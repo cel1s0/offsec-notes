@@ -120,6 +120,7 @@
     * [HTTP Host header attacks](portswigger-academy/advanced-topics/http-host-header-attacks.md)
     * [HTTP request smuggling](portswigger-academy/advanced-topics/http-request-smuggling.md)
     * [OAuth 2.0 authentication vulnerabilities](portswigger-academy/advanced-topics/oauth-2.0-authentication-vulnerabilities.md)
+    * [JWT attacks](portswigger-academy/advanced-topics/jwt-attacks.md)
 * [Walkthroughs](walkthroughs/README.md)
   * [PG Practice](walkthroughs/pg-practice/README.md)
     * [Linux](walkthroughs/pg-practice/linux/README.md)
