@@ -91,6 +91,7 @@
     * [Dynamic Forwarding](readme/port-forwarding/dynamic-forwarding.md)
   * [Useful links](readme/useful-links.md)
 * [Blog](blog/README.md)
+  * [CRTO I & II](blog/crto-i-and-ii.md)
   * [OSCP Preparation](blog/oscp-preparation.md)
   * [New OSCP Exam vs Previous OSCP Exam](blog/new-oscp-exam-vs-previous-oscp-exam.md)
   * [Movements in AD](blog/movements-in-ad.md)
